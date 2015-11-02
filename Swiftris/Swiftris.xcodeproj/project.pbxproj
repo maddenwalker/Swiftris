@@ -25,6 +25,7 @@
 		8C75AF481BE8211100FEAEA8 /* JShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75AF471BE8211100FEAEA8 /* JShape.swift */; };
 		8C75AF4A1BE8212900FEAEA8 /* SShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75AF491BE8212900FEAEA8 /* SShape.swift */; };
 		8C75AF4C1BE8214A00FEAEA8 /* ZShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75AF4B1BE8214A00FEAEA8 /* ZShape.swift */; };
+		8C75AF4E1BE8243F00FEAEA8 /* Swiftris.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75AF4D1BE8243F00FEAEA8 /* Swiftris.swift */; };
 		8C8CAE0A1BE4657E00C34731 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CAE091BE4657E00C34731 /* Block.swift */; };
 		8C8CAE0F1BE6E57400C34731 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CAE0E1BE6E57400C34731 /* Shape.swift */; };
 		8C8CAE111BE6EDE200C34731 /* SquareShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CAE101BE6EDE200C34731 /* SquareShape.swift */; };
@@ -72,6 +73,7 @@
 		8C75AF471BE8211100FEAEA8 /* JShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JShape.swift; sourceTree = "<group>"; };
 		8C75AF491BE8212900FEAEA8 /* SShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SShape.swift; sourceTree = "<group>"; };
 		8C75AF4B1BE8214A00FEAEA8 /* ZShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZShape.swift; sourceTree = "<group>"; };
+		8C75AF4D1BE8243F00FEAEA8 /* Swiftris.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swiftris.swift; sourceTree = "<group>"; };
 		8C8CAE091BE4657E00C34731 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		8C8CAE0E1BE6E57400C34731 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		8C8CAE101BE6EDE200C34731 /* SquareShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareShape.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				8C08A18B1BE42E6900791A89 /* GameViewController.swift */,
+				8C75AF4D1BE8243F00FEAEA8 /* Swiftris.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				8C8CAE111BE6EDE200C34731 /* SquareShape.swift in Sources */,
 				8C08A18A1BE42E6900791A89 /* GameScene.swift in Sources */,
 				8C75AF481BE8211100FEAEA8 /* JShape.swift in Sources */,
+				8C75AF4E1BE8243F00FEAEA8 /* Swiftris.swift in Sources */,
 				8C8CAE0F1BE6E57400C34731 /* Shape.swift in Sources */,
 				8C2D7D961BE4338D00FFDB7C /* Array2D.swift in Sources */,
 				8C75AF441BE81F7B00FEAEA8 /* LineShape.swift in Sources */,
