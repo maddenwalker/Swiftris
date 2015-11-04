@@ -18,9 +18,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="imG-sO-plK" appends="YES" id="dek-bQ-PWn"/>
+                            <outletCollection property="gestureRecognizers" destination="4fI-tc-SxK" appends="YES" id="gor-Cg-phW"/>
+                            <outletCollection property="gestureRecognizers" destination="cAQ-gF-kOZ" appends="YES" id="NbF-68-oBz"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="imG-sO-plK">
+                    <connections>
+                        <action selector="didTap:" destination="BV1-FR-VrT" id="XLO-40-bL5"/>
+                        <outlet property="delegate" destination="BV1-FR-VrT" id="fHD-3J-9dA"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="4fI-tc-SxK">
+                    <connections>
+                        <action selector="didPan:" destination="BV1-FR-VrT" id="Dkq-hR-3yc"/>
+                        <outlet property="delegate" destination="BV1-FR-VrT" id="Qb8-k3-YAL"/>
+                    </connections>
+                </panGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="cAQ-gF-kOZ">
+                    <connections>
+                        <action selector="didSwipe:" destination="BV1-FR-VrT" id="7oR-Qu-U73"/>
+                        <outlet property="delegate" destination="BV1-FR-VrT" id="kY5-YA-xyg"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
         </scene>
     </scenes>
