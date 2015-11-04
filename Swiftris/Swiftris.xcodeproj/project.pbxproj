@@ -15,9 +15,8 @@
 		8C08A1941BE42E6900791A89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C08A1921BE42E6900791A89 /* LaunchScreen.storyboard */; };
 		8C08A19F1BE42E6900791A89 /* SwiftrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08A19E1BE42E6900791A89 /* SwiftrisTests.swift */; };
 		8C08A1AA1BE42E6900791A89 /* SwiftrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08A1A91BE42E6900791A89 /* SwiftrisUITests.swift */; };
-		8C08A1BA1BE42EE400791A89 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 8C08A1B71BE42EE400791A89 /* Images */; };
-		8C08A1BB1BE42EE400791A89 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 8C08A1B81BE42EE400791A89 /* Sounds */; };
 		8C08A1BC1BE42EE400791A89 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8C08A1B91BE42EE400791A89 /* Sprites.atlas */; };
+		8C0CFC2F1BEACEB700816A1A /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 8C0CFC2E1BEACEB700816A1A /* Sounds */; };
 		8C2D7D961BE4338D00FFDB7C /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D7D951BE4338D00FFDB7C /* Array2D.swift */; };
 		8C75AF421BE6F1BC00FEAEA8 /* TShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75AF411BE6F1BC00FEAEA8 /* TShape.swift */; };
 		8C75AF441BE81F7B00FEAEA8 /* LineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75AF431BE81F7B00FEAEA8 /* LineShape.swift */; };
@@ -63,9 +62,8 @@
 		8C08A1A51BE42E6900791A89 /* SwiftrisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftrisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C08A1A91BE42E6900791A89 /* SwiftrisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftrisUITests.swift; sourceTree = "<group>"; };
 		8C08A1AB1BE42E6900791A89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C08A1B71BE42EE400791A89 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
-		8C08A1B81BE42EE400791A89 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		8C08A1B91BE42EE400791A89 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
+		8C0CFC2E1BEACEB700816A1A /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		8C2D7D951BE4338D00FFDB7C /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		8C75AF411BE6F1BC00FEAEA8 /* TShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TShape.swift; sourceTree = "<group>"; };
 		8C75AF431BE81F7B00FEAEA8 /* LineShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineShape.swift; sourceTree = "<group>"; };
@@ -133,10 +131,9 @@
 				8C8CAE0D1BE4659D00C34731 /* Controller */,
 				8C08A18D1BE42E6900791A89 /* Main.storyboard */,
 				8C08A1901BE42E6900791A89 /* Assets.xcassets */,
+				8C0CFC2E1BEACEB700816A1A /* Sounds */,
 				8C08A1921BE42E6900791A89 /* LaunchScreen.storyboard */,
 				8C08A1951BE42E6900791A89 /* Info.plist */,
-				8C08A1B71BE42EE400791A89 /* Images */,
-				8C08A1B81BE42EE400791A89 /* Sounds */,
 				8C08A1B91BE42EE400791A89 /* Sprites.atlas */,
 			);
 			path = Swiftris;
@@ -299,9 +296,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C0CFC2F1BEACEB700816A1A /* Sounds in Resources */,
 				8C08A1BC1BE42EE400791A89 /* Sprites.atlas in Resources */,
-				8C08A1BB1BE42EE400791A89 /* Sounds in Resources */,
-				8C08A1BA1BE42EE400791A89 /* Images in Resources */,
 				8C08A1941BE42E6900791A89 /* LaunchScreen.storyboard in Resources */,
 				8C08A1911BE42E6900791A89 /* Assets.xcassets in Resources */,
 				8C08A18F1BE42E6900791A89 /* Main.storyboard in Resources */,

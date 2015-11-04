@@ -34,14 +34,14 @@ class GameScene: SKScene {
         
         anchorPoint = CGPoint(x: 0, y: 1.0)
         
-        let background = SKSpriteNode(imageNamed: "Images/background")
+        let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 0, y: 0)
         background.anchorPoint = CGPoint(x: 0, y: 1.0)
         addChild(background)
         
         addChild(gameLayer)
         
-        let gameBoardTexture = SKTexture(imageNamed: "Images/gameboard")
+        let gameBoardTexture = SKTexture(imageNamed: "gameboard")
         let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
         
         gameBoard.anchorPoint = CGPoint(x: 0, y: 1.0)
@@ -50,6 +50,8 @@ class GameScene: SKScene {
         shapeLayer.position = layerPosition
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
+        
+//        runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
         
         
     }
@@ -73,6 +75,10 @@ class GameScene: SKScene {
     
     func stopTicking() {
         lastTick = nil
+    }
+    
+    func playSound(sound:String) {
+        runAction(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
     }
     
     
@@ -140,8 +146,63 @@ class GameScene: SKScene {
     }
     
     
-    
-    
+    func animateCollapsingLines(linesToRemove: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>, completion: () -> ()) {
+        var longestDuration: NSTimeInterval = 0
+        
+        for (columnIdx, column) in fallenBlocks.enumerate() {
+            for (blockIdx, block) in column.enumerate() {
+                let newPosition = pointForColumn(block.column, row: block.row)
+                let sprite = block.sprite!
+                
+                let delay = (NSTimeInterval(columnIdx) * 0.05 ) + (NSTimeInterval(blockIdx) * 0.05 )
+                let duration = NSTimeInterval( ( ( sprite.position.y - newPosition.y) / BlockSize ) * 0.1 )
+                let moveAction = SKAction.moveTo(newPosition, duration: duration)
+                moveAction.timingMode = .EaseOut
+                sprite.runAction(
+                    SKAction.sequence([
+                        SKAction.waitForDuration(delay),
+                        moveAction]))
+                longestDuration = max(longestDuration, duration + delay)
+            }
+        }
+        
+        for (_ , row) in linesToRemove.enumerate() {
+            for (_ , block) in row.enumerate() {
+                
+                let randomRadius = CGFloat(UInt(arc4random_uniform(400) + 100))
+                let goLeft = arc4random_uniform(100) % 2 == 0
+                
+                var point = pointForColumn(block.column, row: block.row)
+                point = CGPointMake(point.x + (goLeft ? -randomRadius : randomRadius), point.y)
+                
+                let randomDuration = NSTimeInterval(arc4random_uniform(2)) + 0.5
+                
+                var startAngle = CGFloat(M_PI)
+                var endAngle = startAngle * 2
+                
+                if goLeft {
+                    endAngle = startAngle
+                    startAngle = 0
+                }
+                
+                let archPath = UIBezierPath(arcCenter: point, radius: randomRadius, startAngle: startAngle, endAngle: endAngle, clockwise: goLeft)
+                let archAction = SKAction.followPath(archPath.CGPath, asOffset: false, orientToPath: true, duration: randomDuration)
+                archAction.timingMode = .EaseIn
+                let sprite = block.sprite!
+                
+                sprite.zPosition = 100
+                sprite.runAction(
+                    SKAction.sequence(
+                        [SKAction.group([archAction, SKAction.fadeOutWithDuration(NSTimeInterval(randomDuration))]),
+                        SKAction.removeFromParent()]
+                    )
+                )
+                
+            }
+        }
+        
+        runAction(SKAction.waitForDuration(longestDuration), completion: completion)
+    }
     
     
     
