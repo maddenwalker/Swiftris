@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+//TODO: Figure out how to increase size of sprite color background
 let NumberOfColors: UInt32 = 6
 
 enum BlockColor: Int, CustomStringConvertible {

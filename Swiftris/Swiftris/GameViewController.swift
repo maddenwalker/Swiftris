@@ -8,12 +8,14 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
     
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
+    var avGameBackgroundMusicPlayer:AVAudioPlayer?
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
@@ -34,17 +36,24 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         swiftris.beginGame()
         
         skView.presentScene(scene)
-
+        loadAwfulBackgroundMusic()
+        playPauseAwfulBackgroundMusic()
+        
     }
 
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     
+    //MARK: Buttons & Gestures
     @IBAction func didTap(sender: UITapGestureRecognizer) {
         swiftris.rotateShape()
     }
     
+    @IBAction func volumeButtonPressed(sender: UIButton) {
+        playPauseAwfulBackgroundMusic()
+        toggleButton(sender)
+    }
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
         let currentPoint = sender.translationInView(self.view)
         
@@ -85,6 +94,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         return false
     }
     
+    //MARK: Game Mechanics
     func didTick() {
         swiftris.letShapeFall()
     }
@@ -163,5 +173,35 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     func gameShapeDidMove(swiftris: Swiftris) {
         scene.redrawShape(swiftris.fallingShape!) {}
+    }
+    
+    //MARK: Helper Methods
+    
+    func loadAwfulBackgroundMusic() {
+        if let gameBackgroundMusicURL:NSURL? = NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource("theme", ofType: "mp3")!) {
+            do {
+                avGameBackgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: gameBackgroundMusicURL!)
+                avGameBackgroundMusicPlayer?.prepareToPlay()
+            } catch {
+                print("error occurred playing background music")
+            }
+        }
+    }
+    
+    func playPauseAwfulBackgroundMusic() {
+        if avGameBackgroundMusicPlayer?.playing != true {
+            avGameBackgroundMusicPlayer?.play()
+        } else {
+            avGameBackgroundMusicPlayer?.pause()
+        }
+
+    }
+    
+    func toggleButton(button: UIButton) {
+        if button.imageForState(.Normal) == UIImage(named: "volume-mute.png") {
+            button.setImage(UIImage(named: "ios-volume-high.png"), forState: .Normal)
+        } else {
+            button.setImage(UIImage(named: "volume-mute.png"), forState: .Normal)
+        }
     }
 }
