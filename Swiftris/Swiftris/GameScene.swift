@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-let BlockSize:CGFloat = 20.0
+var BlockSize:CGFloat = 20
 
 let TickLengthLevelOne = NSTimeInterval(600)
 
@@ -33,10 +33,12 @@ class GameScene: SKScene {
         super.init(size: size)
         
         anchorPoint = CGPoint(x: 0, y: 1.0)
+        BlockSize = size.width / 16
         
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 0, y: 0)
         background.anchorPoint = CGPoint(x: 0, y: 1.0)
+        background.size = size
         addChild(background)
         
         addChild(gameLayer)
