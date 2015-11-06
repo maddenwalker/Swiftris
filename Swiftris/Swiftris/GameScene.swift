@@ -16,7 +16,7 @@ class GameScene: SKScene {
     
     let gameLayer = SKNode()
     let shapeLayer = SKNode()
-    let layerPosition = CGPoint(x: 6, y: -6)
+    let layerPosition = CGPoint(x: 8, y: -44)
     
     var tick:(() -> ())?
     var tickLengthMillis = TickLengthLevelOne
@@ -33,7 +33,8 @@ class GameScene: SKScene {
         super.init(size: size)
         
         anchorPoint = CGPoint(x: 0, y: 1.0)
-        BlockSize = size.width / 16
+        
+        BlockSize = ( size.width - 16 ) * ( 1 / 15 )
         
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 0, y: 0)
@@ -44,7 +45,9 @@ class GameScene: SKScene {
         addChild(gameLayer)
         
         let gameBoardTexture = SKTexture(imageNamed: "gameboard")
-        let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
+        let gameBoardWidth = ( BlockSize * CGFloat(NumColumns) )
+        let gameBoardHeight = ( BlockSize * CGFloat(NumRows) )
+        let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSizeMake(gameBoardWidth, gameBoardHeight))
         
         gameBoard.anchorPoint = CGPoint(x: 0, y: 1.0)
         gameBoard.position = layerPosition
@@ -96,7 +99,7 @@ class GameScene: SKScene {
                 textureCache[block.spriteName] = texture
             }
             
-            let sprite = SKSpriteNode(texture: texture)
+            let sprite = SKSpriteNode(texture: texture, size: CGSizeMake(BlockSize, BlockSize))
             
             sprite.position = pointForColumn(block.column, row: block.row - 2)
             
