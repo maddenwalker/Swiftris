@@ -14,11 +14,15 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     var scene: GameScene!
     var swiftris:Swiftris!
+    var gameTimer: NSTimer!
     var panPointReference:CGPoint?
     var avGameBackgroundMusicPlayer:AVAudioPlayer?
     
+    var currentSecondsLeft:Int!
+    
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var gameTypeLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         scene.scaleMode = .AspectFill
         
         scene.tick = didTick
+        
+        currentSecondsLeft = 120
+        setupTimer()
         
         swiftris = Swiftris()
         swiftris.delegate = self
@@ -112,7 +119,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
     }
     
+    //MARK: SwiftrisDelegate Methods
     func gameDidBegin(swiftris: Swiftris) {
+        startTimer()
+        gameTypeLabel.text = "\(currentSecondsLeft)"
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
@@ -174,6 +184,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     func gameShapeDidMove(swiftris: Swiftris) {
         scene.redrawShape(swiftris.fallingShape!) {}
     }
+
     
     //MARK: Helper Methods
     
@@ -202,6 +213,24 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             button.setImage(UIImage(named: "ios-volume-high.png"), forState: .Normal)
         } else {
             button.setImage(UIImage(named: "volume-mute.png"), forState: .Normal)
+        }
+    }
+    
+    func setupTimer() {
+        self.gameTimer = NSTimer(timeInterval: 1.0, target: self, selector: "updateCurrentTimeLeft", userInfo: nil, repeats: true)
+    }
+    
+    func startTimer() {
+        NSRunLoop.mainRunLoop().addTimer(self.gameTimer, forMode: NSRunLoopCommonModes)
+    }
+    
+    func updateCurrentTimeLeft() {
+        if currentSecondsLeft >= 1 {
+            currentSecondsLeft!--
+            gameTypeLabel.text = "\(currentSecondsLeft!)"
+        } else {
+//            gameTypeLabel.text = "Game Over"
+//            swiftris.endGame()
         }
     }
 }

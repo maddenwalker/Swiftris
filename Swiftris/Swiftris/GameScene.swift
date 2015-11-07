@@ -56,7 +56,6 @@ class GameScene: SKScene {
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
         
-        
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -206,24 +205,5 @@ class GameScene: SKScene {
         
         runAction(SKAction.waitForDuration(longestDuration), completion: completion)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }

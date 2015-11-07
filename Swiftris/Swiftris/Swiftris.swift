@@ -290,16 +290,4 @@ class Swiftris {
         delegate?.gameShapeDidMove(self)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
