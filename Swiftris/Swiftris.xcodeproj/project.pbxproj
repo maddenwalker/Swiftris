@@ -17,6 +17,7 @@
 		8C08A1AA1BE42E6900791A89 /* SwiftrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08A1A91BE42E6900791A89 /* SwiftrisUITests.swift */; };
 		8C08A1BC1BE42EE400791A89 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8C08A1B91BE42EE400791A89 /* Sprites.atlas */; };
 		8C2D7D961BE4338D00FFDB7C /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D7D951BE4338D00FFDB7C /* Array2D.swift */; };
+		8C5D1B3B1BF1400B00A355DE /* TimerDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D1B3A1BF1400B00A355DE /* TimerDisplay.swift */; };
 		8C64E28B1BEBC8C40090BB50 /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C64E2861BEBC8C40090BB50 /* bomb.mp3 */; };
 		8C64E28C1BEBC8C40090BB50 /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C64E2871BEBC8C40090BB50 /* drop.mp3 */; };
 		8C64E28D1BEBC8C40090BB50 /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C64E2881BEBC8C40090BB50 /* gameover.mp3 */; };
@@ -68,6 +69,7 @@
 		8C08A1AB1BE42E6900791A89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C08A1B91BE42EE400791A89 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
 		8C2D7D951BE4338D00FFDB7C /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
+		8C5D1B3A1BF1400B00A355DE /* TimerDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerDisplay.swift; sourceTree = "<group>"; };
 		8C64E2861BEBC8C40090BB50 /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		8C64E2871BEBC8C40090BB50 /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
 		8C64E2881BEBC8C40090BB50 /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				8C8CAE091BE4657E00C34731 /* Block.swift */,
+				8C5D1B3A1BF1400B00A355DE /* TimerDisplay.swift */,
 				8C8CAE0E1BE6E57400C34731 /* Shape.swift */,
 				8C8CAE101BE6EDE200C34731 /* SquareShape.swift */,
 				8C75AF411BE6F1BC00FEAEA8 /* TShape.swift */,
@@ -358,6 +361,7 @@
 				8C2D7D961BE4338D00FFDB7C /* Array2D.swift in Sources */,
 				8C75AF441BE81F7B00FEAEA8 /* LineShape.swift in Sources */,
 				8C75AF4A1BE8212900FEAEA8 /* SShape.swift in Sources */,
+				8C5D1B3B1BF1400B00A355DE /* TimerDisplay.swift in Sources */,
 				8C75AF421BE6F1BC00FEAEA8 /* TShape.swift in Sources */,
 				8C8CAE0A1BE4657E00C34731 /* Block.swift in Sources */,
 				8C08A18C1BE42E6900791A89 /* GameViewController.swift in Sources */,

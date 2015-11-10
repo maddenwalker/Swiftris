@@ -14,11 +14,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     var scene: GameScene!
     var swiftris:Swiftris!
+    var timerDisplay: TimerDisplay!
     var gameTimer: NSTimer!
     var panPointReference:CGPoint?
     var avGameBackgroundMusicPlayer:AVAudioPlayer?
     
-    var currentSecondsLeft:Int!
+    var defaultTimer: Int = 120
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
@@ -34,10 +35,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         scene.scaleMode = .AspectFill
         
         scene.tick = didTick
-        
-        currentSecondsLeft = 120
+    
         setupTimer()
-        
+    
         swiftris = Swiftris()
         swiftris.delegate = self
         swiftris.beginGame()
@@ -122,7 +122,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     //MARK: SwiftrisDelegate Methods
     func gameDidBegin(swiftris: Swiftris) {
         startTimer()
-        gameTypeLabel.text = "\(currentSecondsLeft)"
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
@@ -136,12 +135,15 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
     }
     
+    
     func gameDidEnd(swiftris: Swiftris) {
+        //TODO: Figure out why the shapes continue to animate after time is up
         view.userInteractionEnabled = false
         scene.stopTicking()
         scene.playSound("gameover.mp3")
+        stopTimer()
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: Array<Array<Block>>()) {
-            swiftris.beginGame()
+            self.presentUserWithOptionsToReplayOrQuit()
         }
     }
     
@@ -217,6 +219,8 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     func setupTimer() {
+        timerDisplay = TimerDisplay(timeInSeconds: defaultTimer)
+        updateTimeLabel(timerDisplay.timeAsString())
         self.gameTimer = NSTimer(timeInterval: 1.0, target: self, selector: "updateCurrentTimeLeft", userInfo: nil, repeats: true)
     }
     
@@ -224,13 +228,51 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         NSRunLoop.mainRunLoop().addTimer(self.gameTimer, forMode: NSRunLoopCommonModes)
     }
     
+    func stopTimer() {
+        self.gameTimer.invalidate()
+    }
+    
     func updateCurrentTimeLeft() {
-        if currentSecondsLeft >= 1 {
-            currentSecondsLeft!--
-            gameTypeLabel.text = "\(currentSecondsLeft!)"
+        if timerDisplay.timeInSeconds >= 1 {
+            timerDisplay.timeInSeconds--
+            updateTimeLabel(timerDisplay.timeAsString())
         } else {
-//            gameTypeLabel.text = "Game Over"
-//            swiftris.endGame()
+            updateTimeLabel("Game Over")
+            swiftris.endGame()
+        }
+    }
+    
+    func updateTimeLabel(timeLeftString: String) {
+        gameTypeLabel.text = timeLeftString
+    }
+    
+    func presentUserWithOptionsToReplayOrQuit() {
+        let alertViewController = UIAlertController(title: "Nice Job Rockstar!", message: "The game is over, or is it?", preferredStyle: .Alert)
+        
+        let playAgainButton = UIAlertAction(title: "Play Again", style: .Default) { (action) -> Void in
+            self.resetGameBoard(self.repeatGame)
+        }
+        let quitButton = UIAlertAction(title: "Get me out of here", style: .Destructive) { (action) -> Void in
+            //eventually segue here back to main screen
+        }
+        
+        alertViewController.addAction(playAgainButton)
+        alertViewController.addAction(quitButton)
+        
+        self.presentViewController(alertViewController, animated: true, completion: nil)
+        
+    }
+    
+    func repeatGame() {
+        setupTimer()
+        swiftris.beginGame()
+    }
+    
+    func resetGameBoard(completion: () -> ()) {
+        updateTimeLabel("Good Luck!")
+        let shapesToRemove = [swiftris.fallingShape!, swiftris.nextShape!]
+        scene.removeShapes(shapesToRemove) {
+                completion()
         }
     }
 }

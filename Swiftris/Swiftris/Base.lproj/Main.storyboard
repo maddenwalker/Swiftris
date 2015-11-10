@@ -122,9 +122,9 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAME_TYPE_LABEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfy-q8-cXU">
-                                <rect key="frame" x="224" y="28" width="153" height="21"/>
+                                <rect key="frame" x="172.5" y="40" width="255.5" height="31"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -138,7 +138,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="4dI-Xc-3wB" secondAttribute="trailing" id="Gme-HZ-gDE"/>
                             <constraint firstItem="N8B-i8-Mmq" firstAttribute="top" secondItem="jDG-1U-Rfz" secondAttribute="bottom" constant="45" id="IVb-xu-r5s"/>
                             <constraint firstAttribute="trailingMargin" secondItem="N8B-i8-Mmq" secondAttribute="trailing" id="J1f-gF-Gga"/>
-                            <constraint firstItem="zfy-q8-cXU" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="8" id="PPg-kU-HYT"/>
+                            <constraint firstItem="zfy-q8-cXU" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="20" id="PPg-kU-HYT"/>
                             <constraint firstItem="65B-PK-bzw" firstAttribute="centerY" secondItem="N8B-i8-Mmq" secondAttribute="centerY" id="eWI-dz-Q0P"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TdM-Xz-hOb" secondAttribute="trailing" id="eXT-eL-mua"/>
                             <constraint firstItem="zfy-q8-cXU" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="ekl-hW-rBl"/>

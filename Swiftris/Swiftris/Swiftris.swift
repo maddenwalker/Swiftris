@@ -210,6 +210,11 @@ class Swiftris {
         return allBlocks
     }
     
+    func resetGameBoard() {
+        fallingShape = nil
+        nextShape = nil
+    }
+    
     func dropShape() {
         guard let shape = fallingShape else {
             return
