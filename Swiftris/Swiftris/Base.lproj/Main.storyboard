@@ -220,16 +220,30 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cO-Ko-kFL">
+                                <rect key="frame" x="20" y="34" width="44" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="OgI-Oy-kvE"/>
+                                    <constraint firstAttribute="height" constant="44" id="faw-WF-M83"/>
+                                </constraints>
+                                <state key="normal" image="back_arrow"/>
+                                <connections>
+                                    <action selector="backButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="AVA-te-qI3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="4dI-Xc-3wB" firstAttribute="top" secondItem="N8B-i8-Mmq" secondAttribute="bottom" constant="18" id="438-oc-Wku"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="4cO-Ko-kFL" secondAttribute="leading" id="71L-Qk-Lz1"/>
                             <constraint firstItem="65B-PK-bzw" firstAttribute="centerX" secondItem="N8B-i8-Mmq" secondAttribute="centerX" id="FCq-XC-3ks"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4dI-Xc-3wB" secondAttribute="trailing" id="Gme-HZ-gDE"/>
                             <constraint firstItem="N8B-i8-Mmq" firstAttribute="top" secondItem="jDG-1U-Rfz" secondAttribute="bottom" constant="45" id="IVb-xu-r5s"/>
                             <constraint firstAttribute="trailingMargin" secondItem="N8B-i8-Mmq" secondAttribute="trailing" id="J1f-gF-Gga"/>
+                            <constraint firstItem="4cO-Ko-kFL" firstAttribute="centerY" secondItem="zfy-q8-cXU" secondAttribute="centerY" id="Lus-21-WjW"/>
                             <constraint firstItem="zfy-q8-cXU" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="20" id="PPg-kU-HYT"/>
                             <constraint firstItem="65B-PK-bzw" firstAttribute="centerY" secondItem="N8B-i8-Mmq" secondAttribute="centerY" id="eWI-dz-Q0P"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TdM-Xz-hOb" secondAttribute="trailing" id="eXT-eL-mua"/>
@@ -255,6 +269,7 @@
                         <outlet property="gameTypeLabel" destination="zfy-q8-cXU" id="7HC-Sd-eXI"/>
                         <outlet property="levelLabel" destination="QpQ-8B-KHh" id="3Ai-IG-blF"/>
                         <outlet property="scoreLabel" destination="kLu-Qe-91D" id="o3D-oX-ejy"/>
+                        <segue destination="5Hm-8t-iHO" kind="show" identifier="mainMenuSegue" id="VNQ-fK-zg6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -285,6 +300,7 @@
         <image name="Endless" width="113" height="100"/>
         <image name="Leaders" width="113" height="100"/>
         <image name="Timed" width="113" height="100"/>
+        <image name="back_arrow" width="14" height="22"/>
         <image name="background" width="320" height="568"/>
         <image name="gameboard" width="200" height="400"/>
         <image name="home_btn_bg" width="113" height="100"/>

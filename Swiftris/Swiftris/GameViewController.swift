@@ -42,8 +42,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         swiftris.delegate = self
         swiftris.beginGame()
         
-        print("\(defaultTimer)")
-        
         skView.presentScene(scene)
         loadAwfulBackgroundMusic()
         playPauseAwfulBackgroundMusic()
@@ -63,6 +61,13 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         playPauseAwfulBackgroundMusic()
         toggleButton(sender)
     }
+    
+    
+    @IBAction func backButtonPressed() {
+        quitGame()
+        swiftris.endGame()
+    }
+    
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
         let currentPoint = sender.translationInView(self.view)
         
@@ -268,7 +273,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             self.resetGameBoard(self.repeatGame)
         }
         let quitButton = UIAlertAction(title: "Get me out of here", style: .Destructive) { (action) -> Void in
-            //eventually segue here back to main screen
+            self.performSegueWithIdentifier("mainMenuSegue", sender: nil)
         }
         
         alertViewController.addAction(playAgainButton)
@@ -289,5 +294,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         scene.removeShapes(shapesToRemove) {
                 completion()
         }
+    }
+    
+    func quitGame () {
+        presentUserWithOptionsToReplayOrQuit()
     }
 }
