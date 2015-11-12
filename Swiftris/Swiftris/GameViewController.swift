@@ -12,6 +12,7 @@ import AVFoundation
 
 class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
     
+    var skView: SKView!
     var scene: GameScene!
     var swiftris:Swiftris!
     var timerDisplay: TimerDisplay!
@@ -28,7 +29,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let skView = view as! SKView
+        skView = view as! SKView
         skView.multipleTouchEnabled = false;
         
         scene = GameScene(size: skView.bounds.size)
@@ -64,7 +65,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     
     @IBAction func backButtonPressed() {
-        quitGame()
         swiftris.endGame()
     }
     
@@ -273,7 +273,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             self.resetGameBoard(self.repeatGame)
         }
         let quitButton = UIAlertAction(title: "Get me out of here", style: .Destructive) { (action) -> Void in
-            self.performSegueWithIdentifier("mainMenuSegue", sender: nil)
+            self.navigationController?.popViewControllerAnimated(true)
         }
         
         alertViewController.addAction(playAgainButton)
@@ -296,7 +296,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
     }
     
-    func quitGame () {
-        presentUserWithOptionsToReplayOrQuit()
+    //MARK: View Controller Methods
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "mainMenuSegue") {
+            skView.removeFromSuperview()
+            skView = nil
+        }
     }
 }
