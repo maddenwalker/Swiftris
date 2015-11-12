@@ -1,11 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5Hm-8t-iHO">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="hVm-nS-TNG">
+            <objects>
+                <viewController id="5Hm-8t-iHO" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ei4-Wl-opP"/>
+                        <viewControllerLayoutGuide type="bottom" id="Awm-EY-jhb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XmI-xP-SuK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="9xM-mA-qGo">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="605"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gameboard" translatesAutoresizingMaskIntoConstraints="NO" id="Jxb-BU-TqO">
+                                <rect key="frame" x="20" y="297" width="560" height="283"/>
+                                <animations/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8d-mA-pdC">
+                                <rect key="frame" x="35" y="312" width="257.5" height="119"/>
+                                <animations/>
+                                <state key="normal" image="Endless" backgroundImage="home_btn_bg"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ2-5z-s7Y">
+                                <rect key="frame" x="35" y="446" width="257.5" height="119"/>
+                                <animations/>
+                                <state key="normal" image="Leaders" backgroundImage="home_btn_bg"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0M-Rl-9XW">
+                                <rect key="frame" x="307.5" y="312" width="257.5" height="119"/>
+                                <animations/>
+                                <state key="normal" image="Timed" backgroundImage="home_btn_bg"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyV-Xk-rRg">
+                                <rect key="frame" x="307.5" y="446" width="257.5" height="119"/>
+                                <animations/>
+                                <state key="normal" image="Achievements" backgroundImage="home_btn_bg"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTw-da-28b">
+                                <rect key="frame" x="-11" y="-26" width="16" height="98"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jxb-BU-TqO" secondAttribute="trailing" id="0jW-lr-wX9"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="9xM-mA-qGo" secondAttribute="bottom" constant="-5" id="1BJ-wj-tG2"/>
+                            <constraint firstItem="KQ2-5z-s7Y" firstAttribute="height" secondItem="I8d-mA-pdC" secondAttribute="height" id="5AT-i1-UdI"/>
+                            <constraint firstAttribute="bottom" secondItem="Jxb-BU-TqO" secondAttribute="bottom" constant="20" symbolic="YES" id="7g2-Lj-Nxj"/>
+                            <constraint firstItem="AyV-Xk-rRg" firstAttribute="height" secondItem="I8d-mA-pdC" secondAttribute="height" id="DYL-KA-r7F"/>
+                            <constraint firstItem="O0M-Rl-9XW" firstAttribute="trailing" secondItem="Jxb-BU-TqO" secondAttribute="trailing" constant="-15" id="Mvv-mW-V2d"/>
+                            <constraint firstItem="AyV-Xk-rRg" firstAttribute="width" secondItem="I8d-mA-pdC" secondAttribute="width" id="P8l-Sb-osk"/>
+                            <constraint firstItem="I8d-mA-pdC" firstAttribute="leading" secondItem="Jxb-BU-TqO" secondAttribute="leading" constant="15" id="Uch-d5-XKb"/>
+                            <constraint firstItem="O0M-Rl-9XW" firstAttribute="width" secondItem="I8d-mA-pdC" secondAttribute="width" id="V6w-wN-sFU"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Jxb-BU-TqO" secondAttribute="leading" id="WTW-Zj-Vpa"/>
+                            <constraint firstItem="Jxb-BU-TqO" firstAttribute="centerX" secondItem="9xM-mA-qGo" secondAttribute="centerX" id="Wx4-Sp-pJF"/>
+                            <constraint firstItem="O0M-Rl-9XW" firstAttribute="leading" secondItem="I8d-mA-pdC" secondAttribute="trailing" constant="15" id="arC-AE-i21"/>
+                            <constraint firstItem="Jxb-BU-TqO" firstAttribute="top" secondItem="Ei4-Wl-opP" secondAttribute="bottom" constant="277" id="ffh-5x-Flh"/>
+                            <constraint firstItem="O0M-Rl-9XW" firstAttribute="top" secondItem="Jxb-BU-TqO" secondAttribute="top" constant="15" id="iJL-lZ-8iX"/>
+                            <constraint firstItem="KQ2-5z-s7Y" firstAttribute="width" secondItem="I8d-mA-pdC" secondAttribute="width" id="kHD-ht-FS5"/>
+                            <constraint firstItem="KQ2-5z-s7Y" firstAttribute="bottom" secondItem="Jxb-BU-TqO" secondAttribute="bottom" constant="-15" id="kJS-W9-gXO"/>
+                            <constraint firstItem="9xM-mA-qGo" firstAttribute="leading" secondItem="XmI-xP-SuK" secondAttribute="leading" id="kSE-A2-gC7"/>
+                            <constraint firstItem="I8d-mA-pdC" firstAttribute="top" secondItem="Jxb-BU-TqO" secondAttribute="top" constant="15" id="lpr-tS-p8D"/>
+                            <constraint firstItem="O0M-Rl-9XW" firstAttribute="height" secondItem="I8d-mA-pdC" secondAttribute="height" id="n8F-EK-GYc"/>
+                            <constraint firstAttribute="trailing" secondItem="9xM-mA-qGo" secondAttribute="trailing" id="oL9-9p-o0b"/>
+                            <constraint firstItem="AyV-Xk-rRg" firstAttribute="top" secondItem="O0M-Rl-9XW" secondAttribute="bottom" constant="15" id="oMm-h0-q0N"/>
+                            <constraint firstItem="AyV-Xk-rRg" firstAttribute="leading" secondItem="KQ2-5z-s7Y" secondAttribute="trailing" constant="15" id="q6A-JY-WcZ"/>
+                            <constraint firstItem="9xM-mA-qGo" firstAttribute="top" secondItem="XmI-xP-SuK" secondAttribute="top" id="tKG-KO-CdG"/>
+                            <constraint firstItem="KQ2-5z-s7Y" firstAttribute="top" secondItem="I8d-mA-pdC" secondAttribute="bottom" constant="15" id="tOt-yb-Lgz"/>
+                            <constraint firstItem="KQ2-5z-s7Y" firstAttribute="leading" secondItem="Jxb-BU-TqO" secondAttribute="leading" constant="15" id="xTC-gx-U9W"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Gc-E7-oIc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-424" y="448"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -189,6 +269,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Achievements" width="113" height="100"/>
+        <image name="Endless" width="113" height="100"/>
+        <image name="Leaders" width="113" height="100"/>
+        <image name="Timed" width="113" height="100"/>
+        <image name="background" width="320" height="568"/>
+        <image name="gameboard" width="200" height="400"/>
+        <image name="home_btn_bg" width="113" height="100"/>
         <image name="volume-mute" width="1867" height="1867"/>
         <image name="whitebg.png" width="84" height="100"/>
     </resources>
