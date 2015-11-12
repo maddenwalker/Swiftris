@@ -13,7 +13,15 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "timedGameSegue") {
+            let viewController: GameViewController = (segue.destinationViewController as? GameViewController)!
+            viewController.defaultTimer = 120
+        } else if (segue.identifier == "endlessGameSegue") {
+            let viewController: GameViewController = (segue.destinationViewController as? GameViewController)!
+            viewController.defaultTimer = 0
+        }
+    }
     
 }

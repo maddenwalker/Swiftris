@@ -19,7 +19,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var panPointReference:CGPoint?
     var avGameBackgroundMusicPlayer:AVAudioPlayer?
     
-    var defaultTimer: Int = 120
+    var defaultTimer: Int = 5
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
@@ -41,6 +41,8 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         swiftris = Swiftris()
         swiftris.delegate = self
         swiftris.beginGame()
+        
+        print("\(defaultTimer)")
         
         skView.presentScene(scene)
         loadAwfulBackgroundMusic()
@@ -121,7 +123,11 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     //MARK: SwiftrisDelegate Methods
     func gameDidBegin(swiftris: Swiftris) {
-        startTimer()
+        
+        if defaultTimer > 0 {
+             startTimer()
+        }
+        
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
@@ -141,7 +147,11 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         view.userInteractionEnabled = false
         scene.stopTicking()
         scene.playSound("gameover.mp3")
-        stopTimer()
+        
+        if defaultTimer > 0 {
+            stopTimer()
+        }
+        
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: Array<Array<Block>>()) {
             self.presentUserWithOptionsToReplayOrQuit()
         }
@@ -219,9 +229,14 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     func setupTimer() {
-        timerDisplay = TimerDisplay(timeInSeconds: defaultTimer)
+        if ( defaultTimer > 0 ) {
+            timerDisplay = TimerDisplay(timeInSeconds: defaultTimer)
+            self.gameTimer = NSTimer(timeInterval: 1.0, target: self, selector: "updateCurrentTimeLeft", userInfo: nil, repeats: true)
+        } else {
+            timerDisplay = TimerDisplay(endlessGame: true)
+        }
+        
         updateTimeLabel(timerDisplay.timeAsString())
-        self.gameTimer = NSTimer(timeInterval: 1.0, target: self, selector: "updateCurrentTimeLeft", userInfo: nil, repeats: true)
     }
     
     func startTimer() {

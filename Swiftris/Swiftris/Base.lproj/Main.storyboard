@@ -3,13 +3,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main Menu View Controller-->
         <scene sceneID="hVm-nS-TNG">
             <objects>
-                <viewController id="5Hm-8t-iHO" sceneMemberID="viewController">
+                <viewController id="5Hm-8t-iHO" customClass="MainMenuViewController" customModule="Swiftris" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ei4-Wl-opP"/>
                         <viewControllerLayoutGuide type="bottom" id="Awm-EY-jhb"/>
@@ -30,6 +31,9 @@
                                 <rect key="frame" x="35" y="312" width="257.5" height="119"/>
                                 <animations/>
                                 <state key="normal" image="Endless" backgroundImage="home_btn_bg"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="endlessGameSegue" id="aYj-XE-uAl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ2-5z-s7Y">
                                 <rect key="frame" x="35" y="446" width="257.5" height="119"/>
@@ -37,18 +41,24 @@
                                 <state key="normal" image="Leaders" backgroundImage="home_btn_bg"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0M-Rl-9XW">
-                                <rect key="frame" x="307.5" y="312" width="257.5" height="119"/>
+                                <rect key="frame" x="307" y="312" width="257.5" height="119"/>
                                 <animations/>
                                 <state key="normal" image="Timed" backgroundImage="home_btn_bg"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="timedGameSegue" id="FO1-Io-CSr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyV-Xk-rRg">
-                                <rect key="frame" x="307.5" y="446" width="257.5" height="119"/>
+                                <rect key="frame" x="307" y="446" width="257.5" height="119"/>
                                 <animations/>
                                 <state key="normal" image="Achievements" backgroundImage="home_btn_bg"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTw-da-28b">
-                                <rect key="frame" x="-11" y="-26" width="16" height="98"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="aTw-da-28b">
+                                <rect key="frame" x="216" y="119" width="168" height="122"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="aTw-da-28b" secondAttribute="height" multiplier="335:244" id="HHd-PF-RT8"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <animations/>
@@ -63,10 +73,12 @@
                             <constraint firstItem="AyV-Xk-rRg" firstAttribute="width" secondItem="I8d-mA-pdC" secondAttribute="width" id="P8l-Sb-osk"/>
                             <constraint firstItem="I8d-mA-pdC" firstAttribute="leading" secondItem="Jxb-BU-TqO" secondAttribute="leading" constant="15" id="Uch-d5-XKb"/>
                             <constraint firstItem="O0M-Rl-9XW" firstAttribute="width" secondItem="I8d-mA-pdC" secondAttribute="width" id="V6w-wN-sFU"/>
+                            <constraint firstItem="aTw-da-28b" firstAttribute="centerX" secondItem="9xM-mA-qGo" secondAttribute="centerX" id="W6g-lp-r1i"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Jxb-BU-TqO" secondAttribute="leading" id="WTW-Zj-Vpa"/>
                             <constraint firstItem="Jxb-BU-TqO" firstAttribute="centerX" secondItem="9xM-mA-qGo" secondAttribute="centerX" id="Wx4-Sp-pJF"/>
                             <constraint firstItem="O0M-Rl-9XW" firstAttribute="leading" secondItem="I8d-mA-pdC" secondAttribute="trailing" constant="15" id="arC-AE-i21"/>
-                            <constraint firstItem="Jxb-BU-TqO" firstAttribute="top" secondItem="Ei4-Wl-opP" secondAttribute="bottom" constant="277" id="ffh-5x-Flh"/>
+                            <constraint firstItem="Jxb-BU-TqO" firstAttribute="top" secondItem="aTw-da-28b" secondAttribute="bottom" constant="56" id="ekL-2D-1WF"/>
+                            <constraint firstItem="9xM-mA-qGo" firstAttribute="top" secondItem="aTw-da-28b" secondAttribute="bottom" constant="-241" id="gXu-Ex-x7G"/>
                             <constraint firstItem="O0M-Rl-9XW" firstAttribute="top" secondItem="Jxb-BU-TqO" secondAttribute="top" constant="15" id="iJL-lZ-8iX"/>
                             <constraint firstItem="KQ2-5z-s7Y" firstAttribute="width" secondItem="I8d-mA-pdC" secondAttribute="width" id="kHD-ht-FS5"/>
                             <constraint firstItem="KQ2-5z-s7Y" firstAttribute="bottom" secondItem="Jxb-BU-TqO" secondAttribute="bottom" constant="-15" id="kJS-W9-gXO"/>
@@ -276,7 +288,11 @@
         <image name="background" width="320" height="568"/>
         <image name="gameboard" width="200" height="400"/>
         <image name="home_btn_bg" width="113" height="100"/>
+        <image name="logo" width="167" height="122"/>
         <image name="volume-mute" width="1867" height="1867"/>
         <image name="whitebg.png" width="84" height="100"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="aYj-XE-uAl"/>
+    </inferredMetricsTieBreakers>
 </document>
