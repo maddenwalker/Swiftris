@@ -274,6 +274,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
         let quitButton = UIAlertAction(title: "Get me out of here", style: .Destructive) { (action) -> Void in
             self.navigationController?.popViewControllerAnimated(true)
+            self.clearGameBoad()
         }
         
         alertViewController.addAction(playAgainButton)
@@ -296,12 +297,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
     }
     
-    //MARK: View Controller Methods
+    //MARK: Tear Down Methods
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "mainMenuSegue") {
-            skView.removeFromSuperview()
-            skView = nil
-        }
+    func clearGameBoad () {
+        skView.removeFromSuperview()
+        skView = nil
+        avGameBackgroundMusicPlayer?.stop()
+        avGameBackgroundMusicPlayer = nil
     }
 }
