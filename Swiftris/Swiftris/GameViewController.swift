@@ -20,8 +20,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var gameTimer: NSTimer!
     var panPointReference:CGPoint?
     var avGameBackgroundMusicPlayer:AVAudioPlayer?
+    var achievements: [GKAchievement] = []
     
     var defaultTimer: Int = 5
+    var rowsBrokenInGame: Int = 0
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
@@ -203,6 +205,16 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     func gameShapeDidMove(swiftris: Swiftris) {
         scene.redrawShape(swiftris.fallingShape!) {}
     }
+    
+    func gameDidBreakBlocks(rowsBroken: Int) {
+        
+        for achievement in achievements where achievement.completed != true {
+            achievement.percentComplete += ( 100 * Double(rowsBroken) / Double(GameAchievements().allAchievements[achievement.identifier!]!) )
+        }
+        
+        recordAchievements()
+        
+    }
 
     
     //MARK: Helper Methods
@@ -319,6 +331,17 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
                 } else {
                     print("Top Score of \(gkScore.value) reported successfully to Game Center")
                 }
+            }
+        }
+    }
+    
+    func recordAchievements() {
+        
+        print("Attempting to update achievements: \(achievements)")
+        
+        GKAchievement.reportAchievements(achievements) { (error) -> Void in
+            if (error != nil) {
+                print("Error updating achievements: \(error?.description)")
             }
         }
     }
