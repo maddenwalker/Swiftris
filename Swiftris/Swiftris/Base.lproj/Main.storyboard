@@ -38,8 +38,11 @@
                                 <rect key="frame" x="35" y="446" width="258" height="119"/>
                                 <animations/>
                                 <state key="normal" image="Leaders" backgroundImage="home_btn_bg"/>
+                                <connections>
+                                    <action selector="leaderboardButtonPressed:" destination="5Hm-8t-iHO" eventType="touchUpInside" id="lzA-z6-Max"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0M-Rl-9XW">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0M-Rl-9XW">
                                 <rect key="frame" x="307" y="312" width="258" height="119"/>
                                 <animations/>
                                 <state key="normal" image="Timed" backgroundImage="home_btn_bg"/>
@@ -47,7 +50,7 @@
                                     <segue destination="BV1-FR-VrT" kind="show" identifier="timedGameSegue" id="FO1-Io-CSr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyV-Xk-rRg">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyV-Xk-rRg">
                                 <rect key="frame" x="307" y="446" width="258" height="119"/>
                                 <animations/>
                                 <state key="normal" image="Achievements" backgroundImage="home_btn_bg"/>
@@ -196,7 +199,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jDG-1U-Rfz">
                                 <rect key="frame" x="500" y="100" width="80" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEXT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8D-ph-HMd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NEXT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8D-ph-HMd">
                                         <rect key="frame" x="20" y="8" width="41" height="21"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="15"/>
@@ -213,7 +216,7 @@
                                     <constraint firstAttribute="width" constant="80" id="WDh-ix-0dI"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAME_TYPE_LABEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfy-q8-cXU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GAME_TYPE_LABEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfy-q8-cXU">
                                 <rect key="frame" x="173" y="40" width="255" height="31"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>

@@ -124,9 +124,9 @@ class Swiftris {
     }
     
     func endGame() {
+       delegate?.gameDidEnd(self)
         score = 0
         level = 1
-        delegate?.gameDidEnd(self)
     }
     
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {

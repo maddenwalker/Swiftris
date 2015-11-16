@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import AVFoundation
+import GameKit
 
 class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
     
@@ -148,10 +149,11 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     
     func gameDidEnd(swiftris: Swiftris) {
-        //TODO: Figure out why the shapes continue to animate after time is up
         view.userInteractionEnabled = false
         scene.stopTicking()
         scene.playSound("gameover.mp3")
+        
+        reportScoresToGameCenter()
         
         if defaultTimer > 0 {
             stopTimer()
@@ -304,5 +306,20 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         skView = nil
         avGameBackgroundMusicPlayer?.stop()
         avGameBackgroundMusicPlayer = nil
+    }
+    
+    //MARK: GameCenter Implementation
+    func reportScoresToGameCenter() {
+        if GKLocalPlayer.localPlayer().authenticated {
+            let gkScore = GKScore(leaderboardIdentifier: "topScores")
+            gkScore.value = Int64(swiftris.score)
+            GKScore.reportScores([gkScore]) { (error) -> Void in
+                if (error != nil) {
+                    print("Error reporting scores: \(error!.description)")
+                } else {
+                    print("Top Score of \(gkScore.value) reported successfully to Game Center")
+                }
+            }
+        }
     }
 }
