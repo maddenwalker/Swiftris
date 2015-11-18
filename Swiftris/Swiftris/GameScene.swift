@@ -16,7 +16,7 @@ class GameScene: SKScene {
     
     let gameLayer = SKNode()
     let shapeLayer = SKNode()
-    let layerPosition = CGPoint(x: 8, y: -44)
+    var layerPosition:CGPoint!
     
     var tick:(() -> ())?
     var tickLengthMillis = TickLengthLevelOne
@@ -34,7 +34,8 @@ class GameScene: SKScene {
         
         anchorPoint = CGPoint(x: 0, y: 1.0)
         
-        BlockSize = ( size.width - 16 ) * ( 1 / 15 )
+        calculateLayerPosition()
+        BlockSize = calculateBlockSize(size)
         
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 0, y: 0)
@@ -57,6 +58,7 @@ class GameScene: SKScene {
         gameLayer.addChild(shapeLayer)
         
     }
+
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
@@ -69,6 +71,14 @@ class GameScene: SKScene {
             self.lastTick = NSDate()
             tick?()
         }
+    }
+    
+    func calculateBlockSize(size: CGSize) -> CGFloat {
+        return ( size.width - 16 ) * ( 1 / 15 )
+    }
+    
+    func calculateLayerPosition() {
+        layerPosition = CGPoint(x: 8, y: -44)
     }
     
     func startTicking() {

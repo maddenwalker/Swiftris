@@ -12,8 +12,8 @@ let NumRows = 20
 let StartingColumn = 4
 let StartingRow = 0
 
-let PreviewColumn = 12
-let PreviewRow = 1
+var PreviewColumn = 12
+var PreviewRow = 1
 
 let PointsPerLine = 10
 let LevelThreshold = 1000
