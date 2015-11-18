@@ -15,8 +15,9 @@ class MainMenuViewController: UIViewController, GKGameCenterControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        authenticateGameCenter()
-        loadPreExistingAchievements()
+        authenticateGameCenter { () -> Void in
+            self.loadPreExistingAchievements()
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -32,13 +33,16 @@ class MainMenuViewController: UIViewController, GKGameCenterControllerDelegate {
         }
     }
     
-    func authenticateGameCenter() {
+    func authenticateGameCenter(completion: (() -> Void)?) {
         let localPlayer = GKLocalPlayer.localPlayer()
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if ((viewController) != nil) {
                 self.presentViewController(viewController!, animated: true, completion: nil)
             } else {
                 print("(GameCenter) Player Authenticated: \(GKLocalPlayer.localPlayer().authenticated)")
+                if let completion = completion {
+                    completion()
+                }
             }
         }
     }
