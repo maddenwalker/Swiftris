@@ -112,11 +112,6 @@
                             <constraint firstItem="mw6-u1-jgj" firstAttribute="centerY" secondItem="weF-Pa-zaM" secondAttribute="centerY" id="rBe-ik-ko3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wua-SA-5IN" secondAttribute="trailing" constant="90" id="yZf-JA-QyC"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="NQD-Z1-4hz" appends="YES" id="Fcs-c8-nrW"/>
-                            <outletCollection property="gestureRecognizers" destination="AyC-qr-DvE" appends="YES" id="UCk-6f-WcA"/>
-                            <outletCollection property="gestureRecognizers" destination="KtE-jC-QzJ" appends="YES" id="6cp-gG-k6g"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="levelLabel" destination="k3n-Di-baL" id="QWT-9B-BqZ"/>
@@ -124,22 +119,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFW-Nd-Df7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="NQD-Z1-4hz">
-                    <pressTypeMask key="allowedPressTypes" select="YES"/>
-                    <connections>
-                        <action selector="userDidTap:" destination="499-42-d0g" id="rh0-BI-qmy"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="AyC-qr-DvE">
-                    <connections>
-                        <action selector="userDidPan:" destination="499-42-d0g" id="wNJ-1G-KU4"/>
-                    </connections>
-                </panGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="KtE-jC-QzJ">
-                    <connections>
-                        <action selector="userDidSwipe:" destination="499-42-d0g" id="iC9-8J-7Ls"/>
-                    </connections>
-                </swipeGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="AyC-qr-DvE"/>
+                <swipeGestureRecognizer direction="right" id="KtE-jC-QzJ"/>
             </objects>
             <point key="canvasLocation" x="651" y="554"/>
         </scene>

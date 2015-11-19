@@ -10,13 +10,17 @@ import UIKit
 import AVFoundation
 import SpriteKit
 
-class GameViewControllertvOS: UIViewController, SwiftrisDelegate {
+class GameViewControllertvOS: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
     
     var skView: SKView!
     var scene: GameScenetvOS!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
     var avGameBackgroundMusicPlayer:AVAudioPlayer?
+    
+    var tapGestureRecognizer: UITapGestureRecognizer!
+    var panGestureRecognizer: UIPanGestureRecognizer!
+    var swipeGestureRecognizer: UISwipeGestureRecognizer!
 
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
@@ -36,6 +40,21 @@ class GameViewControllertvOS: UIViewController, SwiftrisDelegate {
         PreviewRow = 9
         PreviewColumn = 14
         swiftris.beginGame()
+        
+        tapGestureRecognizer = UITapGestureRecognizer()
+        tapGestureRecognizer.addTarget(self, action: Selector("handleTap"))
+        
+        panGestureRecognizer = UIPanGestureRecognizer()
+        panGestureRecognizer.addTarget(self, action: Selector("handlePan:"))
+        
+        //TODO: Add target action
+        swipeGestureRecognizer = UISwipeGestureRecognizer()
+        
+        let gestureRecognizers = [tapGestureRecognizer, panGestureRecognizer, swipeGestureRecognizer]
+        
+        for gestureRecognizer in gestureRecognizers {
+            self.view.addGestureRecognizer(gestureRecognizer)
+        }
         
         skView.presentScene(scene)
     }
@@ -136,11 +155,11 @@ class GameViewControllertvOS: UIViewController, SwiftrisDelegate {
     
     //MARK: Buttons & Gestures
     
-    @IBAction func userDidTap(sender: UITapGestureRecognizer) {
+    func handleTap() {
         swiftris.rotateShape()
     }
 
-    @IBAction func userDidPan(sender: UIPanGestureRecognizer) {
+    func handlePan(sender: UIPanGestureRecognizer) {
         let currentPoint = sender.translationInView(self.view)
         
         if let originalPoint = panPointReference {
