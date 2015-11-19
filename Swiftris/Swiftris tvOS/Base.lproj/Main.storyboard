@@ -119,8 +119,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFW-Nd-Df7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="AyC-qr-DvE"/>
-                <swipeGestureRecognizer direction="right" id="KtE-jC-QzJ"/>
             </objects>
             <point key="canvasLocation" x="651" y="554"/>
         </scene>

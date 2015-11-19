@@ -1015,6 +1015,7 @@
 				8C1BF3B01BFCF7FE007BFE10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C1BF3B61BFCF7FE007BFE10 /* Build configuration list for PBXNativeTarget "Swiftris tvOSTests" */ = {
 			isa = XCConfigurationList;
@@ -1023,6 +1024,7 @@
 				8C1BF3B21BFCF7FE007BFE10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C1BF3B71BFCF7FE007BFE10 /* Build configuration list for PBXNativeTarget "Swiftris tvOSUITests" */ = {
 			isa = XCConfigurationList;
@@ -1031,6 +1033,7 @@
 				8C1BF3B41BFCF7FE007BFE10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

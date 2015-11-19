@@ -47,8 +47,9 @@ class GameViewControllertvOS: UIViewController, SwiftrisDelegate, UIGestureRecog
         panGestureRecognizer = UIPanGestureRecognizer()
         panGestureRecognizer.addTarget(self, action: Selector("handlePan:"))
         
-        //TODO: Add target action
         swipeGestureRecognizer = UISwipeGestureRecognizer()
+        swipeGestureRecognizer.direction = .Down
+        swipeGestureRecognizer.addTarget(self, action: Selector("handleSwipe"))
         
         let gestureRecognizers = [tapGestureRecognizer, panGestureRecognizer, swipeGestureRecognizer]
         
@@ -77,6 +78,7 @@ class GameViewControllertvOS: UIViewController, SwiftrisDelegate, UIGestureRecog
         
         self.scene.addPreviewShapeToScene(newShapes.nextShape!) {}
         self.scene.movePreviewShape(fallingShape) {
+            self.view.userInteractionEnabled = true
             self.scene.startTicking()
         }
     }
@@ -178,7 +180,7 @@ class GameViewControllertvOS: UIViewController, SwiftrisDelegate, UIGestureRecog
 
     }
     
-    @IBAction func userDidSwipe(sender: UISwipeGestureRecognizer) {
+    func handleSwipe(gestureRecognizer: UISwipeGestureRecognizer) {
         swiftris.dropShape()
     }
     
