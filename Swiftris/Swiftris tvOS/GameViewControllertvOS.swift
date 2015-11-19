@@ -58,6 +58,8 @@ class GameViewControllertvOS: UIViewController, SwiftrisDelegate, UIGestureRecog
         }
         
         skView.presentScene(scene)
+        loadAwfulBackgroundMusic()
+        playPauseAwfulBackgroundMusic()
     }
 
     override func didReceiveMemoryWarning() {
@@ -201,5 +203,30 @@ class GameViewControllertvOS: UIViewController, SwiftrisDelegate, UIGestureRecog
         
         return false
     }
+    
+    //MARK: Audio Visual Helper Methods
+    func loadAwfulBackgroundMusic() {
+        if let gameBackgroundFilePath = NSBundle.mainBundle().pathForResource("theme", ofType: "mp3") {
+                do {
+                    let gameBackgroundMusicURL = NSURL(fileURLWithPath: gameBackgroundFilePath)
+                    avGameBackgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: gameBackgroundMusicURL)
+                    avGameBackgroundMusicPlayer?.prepareToPlay()
+                } catch {
+                    print("error occurred playing background music")
+                }
+
+        }
+        
+    }
+    
+    func playPauseAwfulBackgroundMusic() {
+        if avGameBackgroundMusicPlayer?.playing != true {
+            avGameBackgroundMusicPlayer?.play()
+        } else {
+            avGameBackgroundMusicPlayer?.pause()
+        }
+        
+    }
+
 
 }

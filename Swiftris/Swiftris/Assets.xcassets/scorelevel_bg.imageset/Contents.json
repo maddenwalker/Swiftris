@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "scorelevel_bg@1x.png",
       "scale" : "1x"
     },
     {
