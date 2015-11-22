@@ -6,8 +6,6 @@
 //  Copyright © 2015 Ryan Walker. All rights reserved.
 //
 
-import Foundation
-
 class TimerDisplay {
     var timeInSeconds: Int
     var endlessGame: Bool

@@ -207,9 +207,8 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     func gameDidBreakBlocks(rowsBroken: Int) {
-        
         for achievement in achievements where achievement.completed != true {
-            achievement.percentComplete += ( 100 * Double(rowsBroken) / Double(GameAchievements().allAchievements[achievement.identifier!]!) )
+            achievement.percentComplete += Double(rowsBroken) / Double(GameAchievements().allAchievements[achievement.identifier!]!)
         }
         
         recordAchievements()
@@ -336,9 +335,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     func recordAchievements() {
-        
-        print("Attempting to update achievements: \(achievements)")
-        
         GKAchievement.reportAchievements(achievements) { (error) -> Void in
             if (error != nil) {
                 print("Error updating achievements: \(error?.description)")
