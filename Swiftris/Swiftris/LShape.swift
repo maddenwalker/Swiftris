@@ -23,13 +23,13 @@ class LShape:Shape {
     
     Orientation 180
     
-    | 3 | 2•|
+    | 2 | 3•|
     | 1 |
     | 0 |
     
     Orientation 270
     
-    • | 3 |
+    •       | 3 |
     | 0 | 1 | 2 |
     
     • marks the row/column indicator for the shape

@@ -9,28 +9,39 @@
 import UIKit
 import SpriteKit
 import AVFoundation
+import GameKit
 
 class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
     
+    var skView: SKView!
     var scene: GameScene!
     var swiftris:Swiftris!
+    var timerDisplay: TimerDisplay!
+    var gameTimer: NSTimer!
     var panPointReference:CGPoint?
     var avGameBackgroundMusicPlayer:AVAudioPlayer?
+    var achievements: [GKAchievement] = []
+    
+    var defaultTimer: Int = 5
+    var rowsBrokenInGame: Int = 0
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var gameTypeLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let skView = view as! SKView
+        skView = view as! SKView
         skView.multipleTouchEnabled = false;
         
         scene = GameScene(size: skView.bounds.size)
         scene.scaleMode = .AspectFill
         
         scene.tick = didTick
-        
+    
+        setupTimer()
+    
         swiftris = Swiftris()
         swiftris.delegate = self
         swiftris.beginGame()
@@ -54,6 +65,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         playPauseAwfulBackgroundMusic()
         toggleButton(sender)
     }
+    
+    
+    @IBAction func backButtonPressed() {
+        swiftris.endGame()
+    }
+    
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
         let currentPoint = sender.translationInView(self.view)
         
@@ -112,7 +129,13 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
     }
     
+    //MARK: SwiftrisDelegate Methods
     func gameDidBegin(swiftris: Swiftris) {
+        
+        if defaultTimer > 0 {
+             startTimer()
+        }
+        
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
@@ -126,12 +149,20 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
     }
     
+    
     func gameDidEnd(swiftris: Swiftris) {
         view.userInteractionEnabled = false
         scene.stopTicking()
         scene.playSound("gameover.mp3")
+        
+        reportScoresToGameCenter()
+        
+        if defaultTimer > 0 {
+            stopTimer()
+        }
+        
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: Array<Array<Block>>()) {
-            swiftris.beginGame()
+            self.presentUserWithOptionsToReplayOrQuit()
         }
     }
     
@@ -175,6 +206,17 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         scene.redrawShape(swiftris.fallingShape!) {}
     }
     
+    func gameDidBreakBlocks(rowsBroken: Int) {
+        
+        for achievement in achievements where achievement.completed != true {
+            achievement.percentComplete += ( 100 * Double(rowsBroken) / Double(GameAchievements().allAchievements[achievement.identifier!]!) )
+        }
+        
+        recordAchievements()
+        
+    }
+
+    
     //MARK: Helper Methods
     
     func loadAwfulBackgroundMusic() {
@@ -202,6 +244,105 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             button.setImage(UIImage(named: "ios-volume-high.png"), forState: .Normal)
         } else {
             button.setImage(UIImage(named: "volume-mute.png"), forState: .Normal)
+        }
+    }
+    
+    func setupTimer() {
+        if ( defaultTimer > 0 ) {
+            timerDisplay = TimerDisplay(timeInSeconds: defaultTimer)
+            self.gameTimer = NSTimer(timeInterval: 1.0, target: self, selector: "updateCurrentTimeLeft", userInfo: nil, repeats: true)
+        } else {
+            timerDisplay = TimerDisplay(endlessGame: true)
+        }
+        
+        updateTimeLabel(timerDisplay.timeAsString())
+    }
+    
+    func startTimer() {
+        NSRunLoop.mainRunLoop().addTimer(self.gameTimer, forMode: NSRunLoopCommonModes)
+    }
+    
+    func stopTimer() {
+        self.gameTimer.invalidate()
+    }
+    
+    func updateCurrentTimeLeft() {
+        if timerDisplay.timeInSeconds >= 1 {
+            timerDisplay.timeInSeconds--
+            updateTimeLabel(timerDisplay.timeAsString())
+        } else {
+            updateTimeLabel("Game Over")
+            swiftris.endGame()
+        }
+    }
+    
+    func updateTimeLabel(timeLeftString: String) {
+        gameTypeLabel.text = timeLeftString
+    }
+    
+    func presentUserWithOptionsToReplayOrQuit() {
+        let alertViewController = UIAlertController(title: "Nice Job Rockstar!", message: "The game is over, or is it?", preferredStyle: .Alert)
+        
+        let playAgainButton = UIAlertAction(title: "Play Again", style: .Default) { (action) -> Void in
+            self.resetGameBoard(self.repeatGame)
+        }
+        let quitButton = UIAlertAction(title: "Get me out of here", style: .Destructive) { (action) -> Void in
+            self.navigationController?.popViewControllerAnimated(true)
+            self.clearGameBoad()
+        }
+        
+        alertViewController.addAction(playAgainButton)
+        alertViewController.addAction(quitButton)
+        
+        self.presentViewController(alertViewController, animated: true, completion: nil)
+        
+    }
+    
+    func repeatGame() {
+        setupTimer()
+        swiftris.beginGame()
+    }
+    
+    func resetGameBoard(completion: () -> ()) {
+        updateTimeLabel("Good Luck!")
+        let shapesToRemove = [swiftris.fallingShape!, swiftris.nextShape!]
+        scene.removeShapes(shapesToRemove) {
+                completion()
+        }
+    }
+    
+    //MARK: Tear Down Methods
+    
+    func clearGameBoad () {
+        skView.removeFromSuperview()
+        skView = nil
+        avGameBackgroundMusicPlayer?.stop()
+        avGameBackgroundMusicPlayer = nil
+    }
+    
+    //MARK: GameCenter Implementation
+    func reportScoresToGameCenter() {
+        if GKLocalPlayer.localPlayer().authenticated {
+            let gkScore = GKScore(leaderboardIdentifier: "topScores")
+            gkScore.value = Int64(swiftris.score)
+            GKScore.reportScores([gkScore]) { (error) -> Void in
+                if (error != nil) {
+                    print("Error reporting scores: \(error!.description)")
+                } else {
+                    print("Top Score of \(gkScore.value) reported successfully to Game Center")
+                }
+            }
+        }
+    }
+    
+    func recordAchievements() {
+        
+        print("Attempting to update achievements: \(achievements)")
+        
+        GKAchievement.reportAchievements(achievements) { (error) -> Void in
+            if (error != nil) {
+                print("Error updating achievements: \(error?.description)")
+            }
         }
     }
 }

@@ -36,6 +36,9 @@ protocol SwiftrisDelegate {
     
     //Invoked when the game has reached a new level
     func gameDidLevelUp(swiftris:Swiftris)
+    
+    //Invoked when the game broke rows to start achievements
+    func gameDidBreakBlocks(rowsBroken: Int)
 }
 
 class Swiftris {
@@ -124,9 +127,9 @@ class Swiftris {
     }
     
     func endGame() {
+       delegate?.gameDidEnd(self)
         score = 0
         level = 1
-        delegate?.gameDidEnd(self)
     }
     
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {
@@ -153,6 +156,8 @@ class Swiftris {
         if removedLines.count == 0 {
             return ([], [])
         }
+        
+        delegate?.gameDidBreakBlocks(removedLines.count)
         
         let pointsEarned = removedLines.count * PointsPerLine * level
         score += pointsEarned
@@ -208,6 +213,11 @@ class Swiftris {
         }
         
         return allBlocks
+    }
+    
+    func resetGameBoard() {
+        fallingShape = nil
+        nextShape = nil
     }
     
     func dropShape() {
@@ -289,17 +299,5 @@ class Swiftris {
         
         delegate?.gameShapeDidMove(self)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
