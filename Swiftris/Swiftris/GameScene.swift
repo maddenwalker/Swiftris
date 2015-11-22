@@ -16,7 +16,7 @@ class GameScene: SKScene {
     
     let gameLayer = SKNode()
     let shapeLayer = SKNode()
-    let layerPosition = CGPoint(x: 6, y: -6)
+    var layerPosition:CGPoint!
     
     var tick:(() -> ())?
     var tickLengthMillis = TickLengthLevelOne
@@ -33,7 +33,9 @@ class GameScene: SKScene {
         super.init(size: size)
         
         anchorPoint = CGPoint(x: 0, y: 1.0)
-        BlockSize = size.width / 16
+        
+        calculateLayerPosition()
+        BlockSize = calculateBlockSize(size)
         
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 0, y: 0)
@@ -44,7 +46,9 @@ class GameScene: SKScene {
         addChild(gameLayer)
         
         let gameBoardTexture = SKTexture(imageNamed: "gameboard")
-        let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
+        let gameBoardWidth = ( BlockSize * CGFloat(NumColumns) )
+        let gameBoardHeight = ( BlockSize * CGFloat(NumRows) )
+        let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSizeMake(gameBoardWidth, gameBoardHeight))
         
         gameBoard.anchorPoint = CGPoint(x: 0, y: 1.0)
         gameBoard.position = layerPosition
@@ -53,8 +57,8 @@ class GameScene: SKScene {
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
         
-        
     }
+
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
@@ -67,6 +71,14 @@ class GameScene: SKScene {
             self.lastTick = NSDate()
             tick?()
         }
+    }
+    
+    func calculateBlockSize(size: CGSize) -> CGFloat {
+        return ( size.width - 16 ) * ( 1 / 15 )
+    }
+    
+    func calculateLayerPosition() {
+        layerPosition = CGPoint(x: 8, y: -44)
     }
     
     func startTicking() {
@@ -96,7 +108,7 @@ class GameScene: SKScene {
                 textureCache[block.spriteName] = texture
             }
             
-            let sprite = SKSpriteNode(texture: texture)
+            let sprite = SKSpriteNode(texture: texture, size: CGSizeMake(BlockSize, BlockSize))
             
             sprite.position = pointForColumn(block.column, row: block.row - 2)
             
@@ -145,6 +157,24 @@ class GameScene: SKScene {
         }
     }
     
+    func removeShapes(shapes:Array<Shape>, completion: () -> ()) {
+        var longestDuration: NSTimeInterval = 0
+        var animationDuration: NSTimeInterval = 0
+        
+        for shape in shapes {
+            for block in shape.blocks {
+                let sprite = block.sprite!
+                let randomDuration = NSTimeInterval(arc4random_uniform(2)) + 0.01
+                animationDuration += randomDuration
+                let dissolveAction = SKAction.fadeOutWithDuration(randomDuration)
+                sprite.runAction(dissolveAction)
+            }
+        }
+        
+        longestDuration = max(longestDuration, 1)
+        
+        runAction(SKAction.waitForDuration(longestDuration), completion: completion)
+    }
     
     func animateCollapsingLines(linesToRemove: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>, completion: () -> ()) {
         var longestDuration: NSTimeInterval = 0
@@ -203,24 +233,5 @@ class GameScene: SKScene {
         
         runAction(SKAction.waitForDuration(longestDuration), completion: completion)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
